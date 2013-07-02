@@ -3,7 +3,7 @@ import os
 
 NAME = 'eea.plonebuildout.profile'
 PATH = NAME.split('.') + ['version.txt']
-version = open(os.path.join(*PATH)).read().strip(
+version = open(os.path.join(*PATH)).read().strip()
 
 setup(name='eea.plonebuildout.profile',
       version=version,
