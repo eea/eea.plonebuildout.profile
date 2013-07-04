@@ -1,7 +1,7 @@
 Changelog
 =========
 
-0.1-dev (unreleased)
+0.1 (04-07-2013)
 --------------------
 * Initial release. A simple GS profile that depends on all the core EEA
   packages and sets up the LDAP based user authentication.
