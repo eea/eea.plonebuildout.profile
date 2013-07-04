@@ -13,4 +13,10 @@
         description="Install all core EEA packages"
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
+
+    <genericsetup:importStep
+        name="eea.plonebuildout.profile.various"
+        title="EEA PloneBuildout Profile setup" description="Setup EEA PloneBuildout Profile"
+        handler="eea.plonebuildout.profile.setuphandlers.setupVarious" />
+
 </configure>
