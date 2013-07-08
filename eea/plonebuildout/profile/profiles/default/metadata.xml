@@ -1,18 +1,18 @@
-<?xml version="1.0"?>                                                                                                                                      
-<metadata> 
+<?xml version="1.0"?>
+<metadata>
  <description>eea.plonebuildout.profile profile</description>
  <version>0.1</version>
 
  <dependencies>
-  <dependency>profile-eea.depiction:default</dependency>                                                                                           
-  <dependency>profile-eea.facetednavigation:default</dependency>                                                                                           
-  <dependency>profile-eea.faceted.inheritance:default</dependency>                                                                                           
-  <dependency>profile-eea.geotags:default</dependency>                                                                                           
-  <dependency>profile-eea.rdfmarshaller:default</dependency>                                                                                           
-  <dependency>profile-eea.relations:default</dependency>                                                                                           
-  <dependency>profile-eea.socialmedia:default</dependency>                                                                                           
-  <dependency>profile-eea.tags:default</dependency>                                                                                           
-  <dependency>profile-eea.translations:default</dependency>                                                                                           
+  <dependency>profile-eea.depiction:default</dependency>
+  <dependency>profile-eea.facetednavigation:default</dependency>
+  <dependency>profile-eea.faceted.inheritance:default</dependency>
+  <dependency>profile-eea.geotags:default</dependency>
+  <dependency>profile-eea.rdfmarshaller:default</dependency>
+  <dependency>profile-eea.relations:default</dependency>
+  <dependency>profile-eea.socialmedia:default</dependency>
+  <dependency>profile-eea.tags:default</dependency>
+  <dependency>profile-eea.translations:default</dependency>
  </dependencies>
 
 </metadata>

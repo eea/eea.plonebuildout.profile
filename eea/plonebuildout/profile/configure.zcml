@@ -8,7 +8,7 @@
 
     <genericsetup:registerProfile
         name="default"
-        title="EEA PloneBuildout Profile"
+        title="EEA Plone buildout profile"
         directory="profiles/default"
         description="Install all core EEA packages"
         provides="Products.GenericSetup.interfaces.EXTENSION" />
@@ -16,7 +16,7 @@
 
     <genericsetup:importStep
         name="eea.plonebuildout.profile.various"
-        title="EEA PloneBuildout Profile setup" description="Setup EEA PloneBuildout Profile"
+        title="EEA Plone buildout profile setup" description="Setup EEA Plone buildout profile"
         handler="eea.plonebuildout.profile.setuphandlers.setupVarious" />
 
 </configure>

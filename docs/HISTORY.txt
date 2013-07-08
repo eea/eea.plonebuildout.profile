@@ -1,6 +1,11 @@
 Changelog
 =========
 
+o.2-dev - (unreleased)
+----------------------
+* Change: fixed profile name and cleanup empty spaces.
+  [ghicaale refs #14827]
+
 0.1 (04-07-2013)
 --------------------
 * Initial release. A simple GS profile that depends on all the core EEA
