@@ -1,5 +1,9 @@
 """ Various setup
 """
+try:
+    import Products.LDAPUserFolder
+except ImportError:
+    LDAP_INSTALLED = False
 
 def setupVarious(context):
     """ Do some various setup.
@@ -7,7 +11,11 @@ def setupVarious(context):
     if context.readDataFile('eeaplonebuildout.txt') is None:
         return
 
-    #setup eionet ldap user authentication
+    # LDAP support is not available
+    if not LDAP_INSTALLED:
+        return
+
+    # Setup eionet ldap user authentication
     acl_users = context.getSite().acl_users
     acl_users.manage_addProduct['LDAPMultiPlugins'].manage_addLDAPMultiPlugin(
         id='EIONETLDAP',
