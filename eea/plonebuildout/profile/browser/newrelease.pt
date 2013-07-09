@@ -1,0 +1,7 @@
+<dl class="portalMessage error" tal:condition="view/last_update" i18n:translate="eea_kgs_new_version">
+<dt>
+You are running on a old EEA KGS version, there is a new KGS 
+released: <span tal:content="view/last_update" i18n:name="version" />
+</dt>
+<dd>&nbsp;</dd>
+</dl>

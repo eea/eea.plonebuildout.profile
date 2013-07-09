@@ -1,0 +1,12 @@
+<configure 
+    xmlns:browser="http://namespaces.zope.org/browser">
+
+    <browser:viewlet
+        name="eea.newkgsversion"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+        class=".viewlets.NewReleaseViewlet"
+        permission="cmf.ManagePortal"
+        template="newrelease.pt"
+        />
+
+</configure>
