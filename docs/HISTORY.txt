@@ -3,6 +3,8 @@ Changelog
 
 0.2-dev - (unreleased)
 ----------------------
+* Feature: added a viewlet that informs managers of new EEA KGS availability
+  [tiberich #14827]
 * Change: fixed profile name and cleanup empty spaces.
   [ghicaale refs #14827]
 * Bug fix: don't setup EIONET LDAP if LDAP support is not available.
