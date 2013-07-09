@@ -1,5 +1,5 @@
 eea.plonebuildout.profile Installation
-=======================
+======================================
 
  * When you're reading this you have probably already run
    ``easy_install eea.plonebuildout.profile``. Find out how to install setuptools
