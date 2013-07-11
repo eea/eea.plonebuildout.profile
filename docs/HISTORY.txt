@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.3-dev - (unreleased)
+----------------------
+
 0.2 - (11-07-2013)
 ----------------------
 * Feature: added a viewlet that informs managers of new EEA KGS availability
