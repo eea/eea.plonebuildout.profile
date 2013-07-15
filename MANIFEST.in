@@ -1,2 +1,3 @@
 include *.txt
 recursive-include eea *.txt *.zcml *.xml *.pt
+recursive-include docs *.txt
