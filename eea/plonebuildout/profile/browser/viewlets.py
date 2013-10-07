@@ -38,11 +38,15 @@ class NewReleaseViewlet(ViewletBase):
         j = json.loads(c)
         dirs = []
 
-        for r in j:
-            if r.get('type') == 'dir':
-                name = r['name']
-                if name[0].isdigit():
-                    dirs.append(r.get('name'))
+        # Treat case where github does not return proper json response
+        if isinstance(j, list):
+            for r in j:
+                if r.get('type') == 'dir':
+                    name = r['name']
+                    if name[0].isdigit():
+                        dirs.append(r.get('name'))
+        else:
+            logger.info("Invalid response from github: " + c)
 
         if not dirs:
             logger.info("Could not determine proper EEA KGS releases")

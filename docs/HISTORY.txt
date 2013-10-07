@@ -3,6 +3,8 @@ Changelog
 
 0.3-dev - (unreleased)
 ----------------------
+* Bug fix: treat case where github does not return proper json response
+  [tiberich]
 
 0.2 - (11-07-2013)
 ----------------------
