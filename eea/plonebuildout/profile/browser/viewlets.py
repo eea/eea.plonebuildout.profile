@@ -17,8 +17,8 @@ class NewReleaseViewlet(ViewletBase):
     """A viewlet which informs managers of new EEA KGS releases
     """
 
-    #we cache the result for an hour
-    @ram.cache(lambda *args:time() // (60*60))
+    #we cache the result for 24 hours
+    @ram.cache(lambda *args:time() // (60*60*24))
     def last_update(self):
         """Return a version number if running old KGS version, otherwise None
         """
