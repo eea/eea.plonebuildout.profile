@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.4-dev - (unreleased)
-----------------------
+0.4 - (2013-11-05)
+------------------
 * Change: cache the KGS version for 24 hours
   [tiberich]
 
