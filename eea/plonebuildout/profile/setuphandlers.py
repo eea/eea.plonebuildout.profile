@@ -4,6 +4,9 @@ try:
     import Products.LDAPUserFolder
 except ImportError:
     LDAP_INSTALLED = False
+else:
+    LDAP_INSTALLED = True
+
 
 def setupVarious(context):
     """ Do some various setup.
