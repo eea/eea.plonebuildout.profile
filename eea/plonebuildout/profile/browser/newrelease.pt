@@ -1,7 +1,22 @@
-<dl class="portalMessage error" tal:condition="view/last_update" i18n:translate="eea_kgs_new_version">
-<dt>
-You are running on an old EEA KGS version, there is a new version 
-released: <span tal:content="view/last_update" i18n:name="version" />
-</dt>
+<dl class="portalMessage error" tal:condition="view/last_kgs_update" i18n:translate="eea_kgs_new_version">
+    <dt>
+    You are running on an old EEA KGS version, there is a new version
+    released: <span tal:content="view/last_kgs_update" i18n:name="version" />
+    </dt>
 <dd>&nbsp;</dd>
+</dl>
+<dl class="portalMessage error" tal:condition="python: not view.last_kgs_update() and view.last_buildout_update()" i18n:translate="eea_kgs_new_version">
+    <tal:block tal:define="versions view/last_buildout_update">
+        <dt tal:condition="not: versions/current">
+            You are running on an old version of the buildout, re-run buildout
+            to get an update that will let you know each time there's a change
+            in the upstream.
+        </dt>
+        <dt tal:condition="versions/current">
+            You are running on an old version of the buildout, re-run buildout.
+            You can
+            <a tal:attributes="href string:https://github.com/eea/eea.plonebuildout.core/compare/${versions/current}...HEAD"
+               target="_blank">visualize the changes here</a>.
+        </dt>
+    </tal:block>
 </dl>

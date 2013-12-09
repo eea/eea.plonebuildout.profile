@@ -6,9 +6,8 @@ from distutils import version as vt
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
 from time import time
-import json
 import logging
-import urllib
+import requests
 
 logger = logging.getLogger('eea.plonebuildout.profile')
 
@@ -19,7 +18,7 @@ class NewReleaseViewlet(ViewletBase):
 
     #we cache the result for 24 hours
     @ram.cache(lambda *args:time() // (60*60*24))
-    def last_update(self):
+    def last_kgs_update(self):
         """Return a version number if running old KGS version, otherwise None
         """
 
@@ -34,8 +33,8 @@ class NewReleaseViewlet(ViewletBase):
             
         url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
               "contents/buildout-configs/kgs"
-        c = urllib.urlopen(url).read()
-        j = json.loads(c)
+        c = requests.get(url)
+        j = c.json()
         dirs = []
 
         # Treat case where github does not return proper json response
@@ -60,4 +59,26 @@ class NewReleaseViewlet(ViewletBase):
             return last
 
         return None
-        
+
+    @ram.cache(lambda *args:time() // (60*60*24))
+    def last_buildout_update(self):
+        """
+        Return the revision of the current buildout cfgs
+        and the latest revision on Github if different, None otherwise
+        Keys: `current` and `latest`
+
+        """
+        conf = getConfiguration()
+        env = getattr(conf, 'environment', {})
+
+        current_rev = str(env.get("CURRENT_CORE_VERSION", ''))
+        url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
+              "commits/HEAD"
+        c = requests.get(url)
+        j = c.json()
+        latest_rev = j.get('sha')
+
+        if latest_rev and latest_rev != current_rev:
+            return {'current': current_rev, 'latest': latest_rev}
+
+        return None

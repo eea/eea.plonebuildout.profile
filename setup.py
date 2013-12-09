@@ -26,6 +26,7 @@ setup(name='eea.plonebuildout.profile',
       include_package_data=True,
       zip_safe=False,
       install_requires=[
+          'requests',
           'setuptools',
           # -*- Extra requirements: -*-
       ],

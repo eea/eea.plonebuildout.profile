@@ -3,6 +3,8 @@ Changelog
 
 0.5-dev - (unreleased)
 ----------------------
+* Feature: Manager is announced of any buildout changes, not just kgs
+  [simiamih refs #17343]
 * Bugfix: LDAP_INSTALLED NameError for new installations
   [simiamih refs #17343]
 
