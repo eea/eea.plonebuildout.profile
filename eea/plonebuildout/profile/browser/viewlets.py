@@ -1,13 +1,15 @@
 """Viewlets for eea.plonebuildout.profile
 """
+import os.path
+from time import time
+import logging
+import requests
 
 from App.config import getConfiguration
 from distutils import version as vt
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
-from time import time
-import logging
-import requests
+
 
 logger = logging.getLogger('eea.plonebuildout.profile')
 
@@ -68,10 +70,11 @@ class NewReleaseViewlet(ViewletBase):
         Keys: `current` and `latest`
 
         """
-        conf = getConfiguration()
-        env = getattr(conf, 'environment', {})
+        current_rev = None
+        pin_file = os.path.join(INSTANCE_HOME, "..", "..", ".current_revision")
+        if os.path.exists(pin_file):
+            current_rev = open(pin_file).read().strip()
 
-        current_rev = str(env.get("CURRENT_CORE_VERSION", ''))
         url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
               "commits/HEAD"
         c = requests.get(url)
