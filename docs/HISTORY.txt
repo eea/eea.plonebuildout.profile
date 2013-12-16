@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.6-dev - (unreleased)
+----------------------
+
 0.5 - (2013-12-16)
 ------------------
 * Feature: Manager is announced of any buildout changes, not just kgs
