@@ -47,7 +47,7 @@ class NewReleaseViewlet(ViewletBase):
                     if name[0].isdigit():
                         dirs.append(r.get('name'))
         else:
-            logger.info("Invalid response from github: " + c)
+            logger.info("Invalid response from github: " + c.text)
 
         if not dirs:
             logger.info("Could not determine proper EEA KGS releases")
