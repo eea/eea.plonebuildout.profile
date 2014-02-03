@@ -1,6 +1,9 @@
 Changelog
 =========
 
+0.7-dev - (unreleased)
+----------------------
+
 0.6 - (2014-02-03)
 ------------------
 * Feature: Add 'is_view_template' condition to KGS availability viewlet template
