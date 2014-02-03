@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.6-dev - (unreleased)
-----------------------
+0.6 - (2014-02-03)
+------------------
 * Feature: Add 'is_view_template' condition to KGS availability viewlet template
   [olimpiurob #17960]
 * Bug fix: Fixed an issue where logging the github api response returned
