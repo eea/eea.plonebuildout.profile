@@ -3,6 +3,8 @@ Changelog
 
 0.8-dev - (unreleased)
 ----------------------
+* Feature: WIP: Add analytics reporting feature
+  [olimpiurob refs #22039]
 
 0.7 - (2014-11-20)
 ------------------

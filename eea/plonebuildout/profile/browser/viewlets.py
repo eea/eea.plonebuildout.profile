@@ -1,17 +1,21 @@
 """Viewlets for eea.plonebuildout.profile
 """
-import os.path
 from time import time
 import logging
+import os.path
 import requests
 
 from App.config import getConfiguration
+from DateTime import DateTime
 from distutils import version as vt
+from eea.plonebuildout.profile.browser.utils import get_storage
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
+from persistent.dict import PersistentDict
 
 
 logger = logging.getLogger('eea.plonebuildout.profile')
+EEA_ANALYTICS_URL = 'http://localhost:8080/site/@@eea.controlpaneleeacpbstatusagent.html'
 
 
 class NewReleaseViewlet(ViewletBase):
@@ -85,3 +89,63 @@ class NewReleaseViewlet(ViewletBase):
             return {'current': current_rev, 'latest': latest_rev}
 
         return None
+
+
+class AnalyticsViewlet(ViewletBase):
+    """A viewlet which stores the current requests hostname in a storage
+    """
+    def hostname_checkin(self):
+        """ Store the current hostname and timestamp in the storage
+        """
+        storage = get_storage(self.context)
+        hostnames = storage.get('hostnames', None)
+
+        if hostnames is None:
+            hostnames = storage['hostnames'] = {}
+
+        hostname = self.get_hostname()
+
+        if hostname:
+            if not hostnames.get(hostname):
+                hostnames[hostname] = {'created': DateTime()}
+
+        last_ping = storage.get('last_ping')
+
+        if not last_ping or DateTime().greaterThan(last_ping+7):
+            self.do_ping(hostnames)
+            storage['last_ping'] = DateTime()
+
+        return ''
+
+    def get_hostname(self):
+        """ Extract hostname in virtual-host-safe manner
+        """
+
+        request = self.request
+        if "HTTP_X_FORWARDED_HOST" in request.environ:
+            # Virtual host
+            host = request.environ["HTTP_X_FORWARDED_HOST"]
+        elif "HTTP_HOST" in request.environ:
+            # Direct client request
+            host = request.environ["HTTP_HOST"]
+        else:
+            return None
+
+        # separate to domain name and port sections
+        host = host.split(":")[0].lower()
+
+        return host
+
+    def do_ping(self, hostnames):
+        """ Ping the eea central site
+        """
+
+        # Prepare the data
+        data = { 'hostnames': hostnames.keys() }
+
+        try:
+            requests.post(EEA_ANALYTICS_URL, data=data, timeout=2)
+        except:
+            # TODO: Treat this case
+            pass
+
