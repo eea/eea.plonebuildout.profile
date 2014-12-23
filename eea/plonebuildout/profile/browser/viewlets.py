@@ -7,6 +7,7 @@ import requests
 
 from App.config import getConfiguration
 from DateTime import DateTime
+from copy import deepcopy
 from distutils import version as vt
 from eea.plonebuildout.profile.browser.utils import get_storage
 from plone.app.layout.viewlets.common import ViewletBase
@@ -109,11 +110,16 @@ class AnalyticsViewlet(ViewletBase):
             if not hostnames.get(hostname):
                 hostnames[hostname] = {'created': DateTime()}
 
-        last_ping = storage.get('last_ping')
-
-        if not last_ping or DateTime().greaterThan(last_ping+7):
-            self.do_ping(hostnames)
-            storage['last_ping'] = DateTime()
+            hosts = deepcopy(hostnames)
+            last_ping = storage.get('last_ping')
+            if last_ping:
+                last_ping_date = last_ping.get('date')
+                hostnames_checked = last_ping.get('hostnames')
+                is_old = DateTime().greaterThan(last_ping_date+7)
+                if hostname not in hostnames_checked.keys() or is_old:
+                    self.do_ping(hosts, storage)
+            else:
+                self.do_ping(hosts, storage)
 
         return ''
 
@@ -136,15 +142,21 @@ class AnalyticsViewlet(ViewletBase):
 
         return host
 
-    def do_ping(self, hostnames):
+    def do_ping(self, hostnames, storage):
         """ Ping the eea central site
         """
 
         # Prepare the data
-        data = { 'hostnames': hostnames.keys() }
+        data = {
+            'hostnames': hostnames.keys()
+        }
 
         try:
             requests.post(EEA_ANALYTICS_URL, data=data, timeout=2)
+            storage['last_ping'] = {
+                'hostnames': hostnames,
+                'date': DateTime()
+            }
         except:
             # TODO: Treat this case
             pass
