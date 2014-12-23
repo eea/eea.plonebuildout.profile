@@ -4,6 +4,7 @@ from time import time
 import logging
 import os.path
 import requests
+import socket
 
 from App.config import getConfiguration
 from DateTime import DateTime
@@ -12,11 +13,13 @@ from distutils import version as vt
 from eea.plonebuildout.profile.browser.utils import get_storage
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
-from persistent.dict import PersistentDict
-
+from requests.exceptions import RequestException
+from requests.packages.urllib3.exceptions import ProtocolError
 
 logger = logging.getLogger('eea.plonebuildout.profile')
 EEA_ANALYTICS_URL = 'http://localhost:8080/site/@@eea.controlpaneleeacpbstatusagent.html'
+READ_TIMEOUT = 3.0
+CONNECT_TIMEOUT = 3.0
 
 
 class NewReleaseViewlet(ViewletBase):
@@ -150,14 +153,13 @@ class AnalyticsViewlet(ViewletBase):
         data = {
             'hostnames': hostnames.keys()
         }
+        timeout = (CONNECT_TIMEOUT, READ_TIMEOUT)
 
         try:
-            requests.post(EEA_ANALYTICS_URL, data=data, timeout=2)
+            requests.post(EEA_ANALYTICS_URL, data=data, timeout=timeout)
             storage['last_ping'] = {
                 'hostnames': hostnames,
                 'date': DateTime()
             }
-        except:
-            # TODO: Treat this case
-            pass
-
+        except Exception as e:
+            logger.info(e)
