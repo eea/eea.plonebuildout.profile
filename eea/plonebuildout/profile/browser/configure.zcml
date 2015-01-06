@@ -9,4 +9,12 @@
         template="newrelease.pt"
         />
 
+    <browser:viewlet
+        name="eea.analytics"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+        class=".viewlets.AnalyticsViewlet"
+        permission="zope2.View"
+        template="analytics.pt"
+        />
+
 </configure>

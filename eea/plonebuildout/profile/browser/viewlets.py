@@ -1,17 +1,22 @@
 """Viewlets for eea.plonebuildout.profile
 """
-import os.path
 from time import time
 import logging
+import os.path
 import requests
 
 from App.config import getConfiguration
+from DateTime import DateTime
+from copy import deepcopy
 from distutils import version as vt
+from eea.plonebuildout.profile.browser.utils import get_storage
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
 
-
 logger = logging.getLogger('eea.plonebuildout.profile')
+EEA_ANALYTICS_URL = 'http://www.eea.europa.eu/@@eea.controlpaneleeacpbstatusagent.html'
+READ_TIMEOUT = 3.0
+CONNECT_TIMEOUT = 3.0
 
 
 class NewReleaseViewlet(ViewletBase):
@@ -85,3 +90,90 @@ class NewReleaseViewlet(ViewletBase):
             return {'current': current_rev, 'latest': latest_rev}
 
         return None
+
+
+class AnalyticsViewlet(ViewletBase):
+    """A viewlet which stores the current requests hostname in a storage
+    """
+    def hostname_checkin(self):
+        """ Store the current hostname and timestamp in the storage
+        """
+        storage = get_storage(self.context)
+        hostnames = storage.get('hostnames', None)
+
+        if hostnames is None:
+            hostnames = storage['hostnames'] = {}
+
+        hostname = self.get_hostname()
+
+        if hostname:
+            if not hostnames.get(hostname):
+                hostnames[hostname] = {'created': DateTime()}
+
+            hosts = deepcopy(hostnames)
+            last_ping = storage.get('last_ping')
+            if last_ping:
+                last_ping_date = last_ping.get('date')
+                hostnames_checked = last_ping.get('hostnames')
+                success = last_ping.get('success')
+                new_hostname = hostname not in hostnames_checked.keys()
+                if success:
+                    is_old = DateTime().greaterThan(last_ping_date+7)
+                    if new_hostname or is_old:
+                        self.do_ping(hosts, storage)
+                else:
+                    is_old = DateTime().greaterThan(last_ping_date+1)
+                    if is_old:
+                        self.do_ping(hosts, storage)
+            else:
+                self.do_ping(hosts, storage)
+
+        return None
+
+    def get_hostname(self):
+        """ Extract hostname in virtual-host-safe manner
+        """
+
+        request = self.request
+        if "HTTP_X_FORWARDED_HOST" in request.environ:
+            # Virtual host
+            host = request.environ["HTTP_X_FORWARDED_HOST"]
+        elif "HTTP_HOST" in request.environ:
+            # Direct client request
+            host = request.environ["HTTP_HOST"]
+        else:
+            return None
+
+        # separate to domain name and port sections
+        host = host.split(":")[0].lower()
+
+        return host
+
+    def do_ping(self, hostnames, storage):
+        """ Ping the eea central site
+        """
+
+        # Prepare the data
+        data = {
+            'hostnames': hostnames.keys()
+        }
+        timeout = (CONNECT_TIMEOUT, READ_TIMEOUT)
+
+        try:
+            req = requests.post(EEA_ANALYTICS_URL, data=data, timeout=timeout)
+            success = False
+            if req.status_code == 200:
+                success = True
+
+            storage['last_ping'] = {
+                'hostnames': hostnames,
+                'date': DateTime(),
+                'success': success
+            }
+        except Exception as e:
+            storage['last_ping'] = {
+                'hostnames': hostnames,
+                'date': DateTime(),
+                'success': False
+            }
+            logger.info(e)

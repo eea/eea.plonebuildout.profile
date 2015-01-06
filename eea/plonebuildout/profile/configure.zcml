@@ -21,4 +21,9 @@
         title="EEA Plone buildout profile setup" description="Setup EEA Plone buildout profile"
         handler="eea.plonebuildout.profile.setuphandlers.setupVarious" />
 
+    <!-- Make the zope root annotatable -->
+    <class class="OFS.Application.Application">
+        <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+    </class>
+
 </configure>
