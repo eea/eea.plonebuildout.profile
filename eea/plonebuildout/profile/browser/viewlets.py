@@ -4,7 +4,6 @@ from time import time
 import logging
 import os.path
 import requests
-import socket
 
 from App.config import getConfiguration
 from DateTime import DateTime
@@ -13,10 +12,9 @@ from distutils import version as vt
 from eea.plonebuildout.profile.browser.utils import get_storage
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
-from requests.exceptions import RequestException
-from requests.packages.urllib3.exceptions import ProtocolError
 
 logger = logging.getLogger('eea.plonebuildout.profile')
+# EEA_ANALYTICS_URL = 'http://www.eea.europa.eu/@@eea.controlpaneleeacpbstatusagent.html'
 EEA_ANALYTICS_URL = 'http://localhost:8080/site/@@eea.controlpaneleeacpbstatusagent.html'
 READ_TIMEOUT = 3.0
 CONNECT_TIMEOUT = 3.0
@@ -118,13 +116,20 @@ class AnalyticsViewlet(ViewletBase):
             if last_ping:
                 last_ping_date = last_ping.get('date')
                 hostnames_checked = last_ping.get('hostnames')
-                is_old = DateTime().greaterThan(last_ping_date+7)
-                if hostname not in hostnames_checked.keys() or is_old:
-                    self.do_ping(hosts, storage)
+                success = last_ping.get('success')
+                new_hostname = hostname not in hostnames_checked.keys()
+                if success:
+                    is_old = DateTime().greaterThan(last_ping_date+7)
+                    if new_hostname or is_old:
+                        self.do_ping(hosts, storage)
+                else:
+                    is_old = DateTime().greaterThan(last_ping_date+1)
+                    if is_old:
+                        self.do_ping(hosts, storage)
             else:
                 self.do_ping(hosts, storage)
 
-        return ''
+        return None
 
     def get_hostname(self):
         """ Extract hostname in virtual-host-safe manner
@@ -156,10 +161,20 @@ class AnalyticsViewlet(ViewletBase):
         timeout = (CONNECT_TIMEOUT, READ_TIMEOUT)
 
         try:
-            requests.post(EEA_ANALYTICS_URL, data=data, timeout=timeout)
+            req = requests.post(EEA_ANALYTICS_URL, data=data, timeout=timeout)
+            success = False
+            if req.status_code == 200:
+                success = True
+
             storage['last_ping'] = {
                 'hostnames': hostnames,
-                'date': DateTime()
+                'date': DateTime(),
+                'success': success
             }
         except Exception as e:
+            storage['last_ping'] = {
+                'hostnames': hostnames,
+                'date': DateTime(),
+                'success': False
+            }
             logger.info(e)
