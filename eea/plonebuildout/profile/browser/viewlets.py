@@ -14,8 +14,7 @@ from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
 
 logger = logging.getLogger('eea.plonebuildout.profile')
-# EEA_ANALYTICS_URL = 'http://www.eea.europa.eu/@@eea.controlpaneleeacpbstatusagent.html'
-EEA_ANALYTICS_URL = 'http://localhost:8080/site/@@eea.controlpaneleeacpbstatusagent.html'
+EEA_ANALYTICS_URL = 'http://www.eea.europa.eu/@@eea.controlpaneleeacpbstatusagent.html'
 READ_TIMEOUT = 3.0
 CONNECT_TIMEOUT = 3.0
 
