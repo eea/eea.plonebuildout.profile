@@ -3,6 +3,11 @@ Changelog
 
 0.9-dev - (unreleased)
 ----------------------
+* Upgrade step: Within "Plone > Site setup > Add-ons" click on
+  upgrade button available for EEA Plone buildout profile
+  [olimpiurob refs #22037]
+* Change: Added IPloneBuildoutProfileLayer add-on layer
+  [olimpiurob refs #22037]
 
 0.8 - (2015-01-08)
 ------------------

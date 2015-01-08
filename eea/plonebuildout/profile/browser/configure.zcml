@@ -3,6 +3,7 @@
 
     <browser:viewlet
         name="eea.newkgsversion"
+        layer="eea.plonebuildout.profile.interfaces.IPloneBuildoutProfileLayer"
         manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
         class=".viewlets.NewReleaseViewlet"
         permission="cmf.ManagePortal"
@@ -11,6 +12,7 @@
 
     <browser:viewlet
         name="eea.analytics"
+        layer="eea.plonebuildout.profile.interfaces.IPloneBuildoutProfileLayer"
         manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
         class=".viewlets.AnalyticsViewlet"
         permission="zope2.View"
