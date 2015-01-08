@@ -1,8 +1,8 @@
 Changelog
 =========
 
-0.8-dev - (unreleased)
-----------------------
+0.8 - (2015-01-08)
+------------------
 * Feature: Added analytics reporting feature
   [olimpiurob refs #22039]
 
