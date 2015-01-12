@@ -194,7 +194,6 @@ class RequiredPkgsViewlet(ViewletBase):
         installed_pkgs = [prod.get('id') for prod in prods
                           if prod.get('status') == 'installed']
 
-        import pdb; pdb.set_trace( )
         for pkg in REQUIRED_PKGS:
             if pkg not in installed_pkgs:
                 missing.append(pkg)
