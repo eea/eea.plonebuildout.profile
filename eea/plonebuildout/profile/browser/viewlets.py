@@ -7,9 +7,11 @@ import requests
 
 from App.config import getConfiguration
 from DateTime import DateTime
+from Products.CMFCore.utils import getToolByName
 from copy import deepcopy
 from distutils import version as vt
 from eea.plonebuildout.profile.browser.utils import get_storage
+from eea.plonebuildout.profile.browser.utils import REQUIRED_PKGS
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
 
@@ -177,3 +179,24 @@ class AnalyticsViewlet(ViewletBase):
                 'success': False
             }
             logger.info(e)
+
+
+class RequiredPkgsViewlet(ViewletBase):
+    """ A viewlet which displays a warning about missing required packages
+    """
+
+    def get_missing_packages(self):
+        """ Return a list of missing required packages
+        """
+        missing = []
+        qi = getToolByName(self.context, 'portal_quickinstaller')
+        prods = qi.listInstallableProducts(skipInstalled=False)
+        installed_pkgs = [prod.get('id') for prod in prods
+                          if prod.get('status') == 'installed']
+
+        import pdb; pdb.set_trace( )
+        for pkg in REQUIRED_PKGS:
+            if pkg not in installed_pkgs:
+                missing.append(pkg)
+
+        return missing

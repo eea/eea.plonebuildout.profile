@@ -1,0 +1,14 @@
+<tal:metal tal:condition="context/@@plone_context_state/is_view_template">
+    <dl class="portalMessage error" tal:condition="view/get_missing_packages" i18n:translate="eea_missing_packages">
+        <dt>
+        The following required packages are not installed and/or activated on your deployment:
+        <ul>
+            <li tal:repeat="pkg view/get_missing_packages">
+                <span tal:content="pkg" />
+            </li>
+        </ul>
+        </dt>
+    <!-- <dd>&nbsp;</dd> -->
+    </dl>
+</tal:metal>
+

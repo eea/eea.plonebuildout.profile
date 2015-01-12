@@ -2,6 +2,18 @@ from zope.annotation.interfaces import IAnnotations
 from persistent.dict import PersistentDict
 
 KEY = "eea.plonebuildout.profile"
+REQUIRED_PKGS = [
+    'eea.rdfmarshaller',
+    'eea.tags',
+    'eea.translations',
+    'eea.tinymce',
+    'eea.uberlisting',
+    'eea.relations',
+    'eea.plonebuildout.profile',
+    'eea.facetednavigation',
+    'eea.faceted.vocabularies',
+    'eea.faceted.inheritance'
+]
 
 
 def get_storage(context):

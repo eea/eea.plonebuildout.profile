@@ -3,6 +3,8 @@ Changelog
 
 1.0-dev - (unreleased)
 ----------------------
+* Feature: WIP: Add viewlet with required/mandatory packages
+  [olimpiurob refs #22038]
 
 0.9 - (2015-01-08)
 ------------------
