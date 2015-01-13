@@ -188,14 +188,27 @@ class RequiredPkgsViewlet(ViewletBase):
     def get_missing_packages(self):
         """ Return a list of missing required packages
         """
-        missing = []
+        missing = {}
+        available_pkgs = []
+        installed_pkgs = []
         qi = getToolByName(self.context, 'portal_quickinstaller')
         prods = qi.listInstallableProducts(skipInstalled=False)
-        installed_pkgs = [prod.get('id') for prod in prods
-                          if prod.get('status') == 'installed']
+
+        for prod in prods:
+            pkg_id = prod.get('id')
+            if prod.get('status') == 'installed':
+                installed_pkgs.append(pkg_id)
+            else:
+                available_pkgs.append(pkg_id)
 
         for pkg in REQUIRED_PKGS:
             if pkg not in installed_pkgs:
-                missing.append(pkg)
+                if pkg not in available_pkgs:
+                    try:
+                        __import__(pkg)
+                    except ImportError:
+                        missing[pkg] = False
+                else:
+                    missing[pkg] = True
 
         return missing

@@ -1,14 +1,21 @@
-<tal:metal tal:condition="context/@@plone_context_state/is_view_template">
+<tal:metal tal:condition="context/@@plone_context_state/is_view_template"
+    tal:define="site_url python:context.portal_url()">
     <dl class="portalMessage error" tal:condition="view/get_missing_packages" i18n:translate="eea_missing_packages">
-        <dt>
-        The following required packages are not installed and/or activated on your deployment:
-        <ul>
-            <li tal:repeat="pkg view/get_missing_packages">
-                <span tal:content="pkg" />
+        <dd>
+        The following required packages are not installed or are not activated on your deployment:
+        <ul tal:define="missing_pkgs view/get_missing_packages">
+            <li tal:repeat="pkg python: missing_pkgs.keys()">
+                <span tal:content="pkg" /> - 
+                <tal:block tal:condition="python: missing_pkgs[pkg]">
+                    <span i18n:translate="">Package available but not activated</span>
+                </tal:block>
+                <tal:block tal:condition="python:not missing_pkgs[pkg]">
+                    <span i18n:translate="">Package not available</span>
+                </tal:block>
             </li>
         </ul>
-        </dt>
-    <!-- <dd>&nbsp;</dd> -->
+        <a tal:attributes="href string:${site_url}/prefs_install_products_form">Add-ons</a>
+        </dd>
     </dl>
 </tal:metal>
 
