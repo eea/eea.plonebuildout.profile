@@ -2,18 +2,25 @@
     tal:define="site_url python:context.portal_url()">
     <dl class="portalMessage error" tal:condition="view/get_missing_packages" i18n:translate="eea_missing_packages">
         <dd>
-        The following required packages are not installed or are not activated on your deployment:
+        <h4 i18n:translate="">The following required packages are not installed or are not activated on your deployment:</h4>
         <ul tal:define="missing_pkgs view/get_missing_packages">
             <li tal:repeat="pkg python: missing_pkgs.keys()">
-                <span tal:content="pkg" /> - 
-                <tal:block tal:condition="python: missing_pkgs[pkg]">
-                    <span i18n:translate="">Package available but not activated</span>
-                </tal:block>
-                <tal:block tal:condition="python:not missing_pkgs[pkg]">
-                    <span i18n:translate="">Package not available</span>
-                </tal:block>
+                <tal:def tal:define="pkg_info python: missing_pkgs[pkg]">
+                    <a tal:attributes="href python: pkg_info.get('url')"
+                        tal:condition="python: pkg_info.get('url')"
+                        tal:content="pkg" />
+                    <span tal:condition="python: not pkg_info.get('url')"
+                        tal:content="pkg" /> - 
+                    <tal:block tal:condition="python: pkg_info.get('available')">
+                        <span i18n:translate="">Package available but not activated</span>
+                    </tal:block>
+                    <tal:block tal:condition="python:not pkg_info.get('available')">
+                        <span i18n:translate="">Package not available</span>
+                    </tal:block>
+                </tal:def>
             </li>
         </ul>
+        <span i18n:translate="">You can activate and deactivate available add-ons here: </span>
         <a tal:attributes="href string:${site_url}/prefs_install_products_form">Add-ons</a>
         </dd>
     </dl>

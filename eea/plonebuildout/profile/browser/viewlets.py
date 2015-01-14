@@ -202,13 +202,18 @@ class RequiredPkgsViewlet(ViewletBase):
                 available_pkgs.append(pkg_id)
 
         for pkg in REQUIRED_PKGS:
-            if pkg not in installed_pkgs:
-                if pkg not in available_pkgs:
+            pkg_id = pkg.get('pkg_id')
+            if pkg_id not in installed_pkgs:
+                if pkg_id not in available_pkgs:
                     try:
-                        __import__(pkg)
+                        __import__(pkg_id)
                     except ImportError:
-                        missing[pkg] = False
+                        missing_pkg = pkg.copy()
+                        missing_pkg['available'] = False
+                        missing[pkg_id] = missing_pkg
                 else:
-                    missing[pkg] = True
+                        missing_pkg = pkg.copy()
+                        missing_pkg['available'] = True
+                        missing[pkg_id] = missing_pkg
 
         return missing
