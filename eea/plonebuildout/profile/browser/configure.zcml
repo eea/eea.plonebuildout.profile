@@ -7,7 +7,7 @@
         manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
         class=".viewlets.NewReleaseViewlet"
         permission="cmf.ManagePortal"
-        template="newrelease.pt"
+        template="templates/newrelease.pt"
         />
 
     <browser:viewlet
@@ -16,7 +16,14 @@
         manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
         class=".viewlets.AnalyticsViewlet"
         permission="zope2.View"
-        template="analytics.pt"
+        template="templates/analytics.pt"
         />
 
+    <browser:viewlet
+        name="eea.requiredpkgs"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+        class=".viewlets.RequiredPkgsViewlet"
+        permission="cmf.ManagePortal"
+        template="templates/requiredpkgs.pt"
+        />
 </configure>
