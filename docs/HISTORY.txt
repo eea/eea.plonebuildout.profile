@@ -1,8 +1,8 @@
 Changelog
 =========
 
-1.0-dev - (unreleased)
-----------------------
+1.0 - (2015-02-03)
+------------------
 * Feature: Add viewlet with required/mandatory packages
   [olimpiurob refs #22038]
 
