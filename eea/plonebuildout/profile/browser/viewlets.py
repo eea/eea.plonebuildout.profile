@@ -38,8 +38,8 @@ class NewReleaseViewlet(ViewletBase):
         if kgsver is None:
             logger.info("EEA_KGS_VERSION is not defined as environment "
                         "variable. Please use proper buildout configuration")
-            return 
-            
+            return
+
         url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
               "contents/buildout-configs/kgs"
         c = requests.get(url)
@@ -58,7 +58,7 @@ class NewReleaseViewlet(ViewletBase):
 
         if not dirs:
             logger.info("Could not determine proper EEA KGS releases")
-            return 
+            return
 
         versions = [vt.StrictVersion(v) for v in dirs]
         versions.sort()
@@ -137,6 +137,7 @@ class AnalyticsViewlet(ViewletBase):
         """
 
         request = self.request
+        result = []
         if "HTTP_X_FORWARDED_HOST" in request.environ:
             # Virtual host
             host = request.environ["HTTP_X_FORWARDED_HOST"]
@@ -149,7 +150,16 @@ class AnalyticsViewlet(ViewletBase):
         # separate to domain name and port sections
         host = host.split(":")[0].lower()
 
-        return host
+        # filter bad/irrelevant domain names
+        for h in host:
+            if h.endswith('europa.eu'):
+                result.append(h)
+            elif h == 'localhost':
+                result.append(h)
+            elif len(h.split('.')) == 4:
+                result.append(h)
+
+        return result
 
     def do_ping(self, hostnames, storage):
         """ Ping the eea central site
