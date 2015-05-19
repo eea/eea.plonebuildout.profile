@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.0.dev0 - (unreleased)
------------------------
+2.0 - (2015-05-19)
+------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
   upgrade button available for EEA Plone buildout profile.
   [voineali refs #24289]
