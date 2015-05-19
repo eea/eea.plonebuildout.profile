@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
  <description>eea.plonebuildout.profile profile</description>
- <version>0.9</version>
+ <version>2.0</version>
 
  <dependencies>
   <dependency>profile-eea.depiction:default</dependency>
@@ -13,6 +13,9 @@
   <dependency>profile-eea.socialmedia:default</dependency>
   <dependency>profile-eea.tags:default</dependency>
   <dependency>profile-eea.translations:default</dependency>
+  <dependency>profile-eea.tinymce:default</dependency>
+  <dependency>profile-eea.uberlisting:default</dependency>
+  <dependency>profile-eea.cache:default</dependency>
  </dependencies>
 
 </metadata>

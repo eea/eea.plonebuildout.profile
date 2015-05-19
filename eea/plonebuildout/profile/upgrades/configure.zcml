@@ -4,6 +4,18 @@
   i18n_domain="eea">
 
   <genericsetup:upgradeSteps
+    source="0.9"
+    destination="2.0"
+    profile="eea.plonebuildout.profile:default">
+
+    <genericsetup:upgradeStep
+      title="#24289: Migrate to plone.app.ldap"
+      handler=".evolve20.migrate2plone_app_ldap"
+      />
+
+  </genericsetup:upgradeSteps>
+
+  <genericsetup:upgradeSteps
     source="*"
     destination="0.9"
     profile="eea.plonebuildout.profile:default">

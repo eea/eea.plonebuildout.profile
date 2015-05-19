@@ -16,10 +16,17 @@
         description="Install all core EEA packages"
         provides="Products.GenericSetup.interfaces.EXTENSION" />
 
+    <genericsetup:registerProfile
+        name="ldap"
+        title="EEA Plone buildout profile (LDAP)"
+        directory="profiles/ldap"
+        description="Install and configure EIONET LDAP using plone.app.ldap"
+        provides="Products.GenericSetup.interfaces.EXTENSION" />
 
     <genericsetup:importStep
         name="eea.plonebuildout.profile.various"
-        title="EEA Plone buildout profile setup" description="Setup EEA Plone buildout profile"
+        title="EEA Plone buildout profile setup"
+        description="Setup EEA Plone buildout profile"
         handler="eea.plonebuildout.profile.setuphandlers.setupVarious" />
 
     <!-- Make the zope root annotatable -->
