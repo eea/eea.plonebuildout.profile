@@ -148,13 +148,17 @@ class AnalyticsViewlet(ViewletBase):
             return None
 
         # separate to domain name and port sections
+        host_list = []
         host = host.split(":")[0].lower()
+        host_list.append(host)
 
         # filter bad/irrelevant domain names
-        for h in host:
+        for h in host_list:
             if h.endswith('europa.eu'):
                 result.append(h)
             elif h == 'localhost':
+                result.append(h)
+            elif h == 'land.copernicus.eu':
                 result.append(h)
             elif len(h.split('.')) == 4:
                 result.append(h)
