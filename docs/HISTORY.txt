@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.2.dev0 - (unreleased)
+-----------------------
+* Bug fix: Release a new egg
+  [ghicaale refs #25014]
+
 2.1 - (2015-05-27)
 ------------------
 * Bug fix: fixed hostname filter to proper display CPB analytics
