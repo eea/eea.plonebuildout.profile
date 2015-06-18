@@ -106,29 +106,29 @@ class AnalyticsViewlet(ViewletBase):
         if hostnames is None:
             hostnames = storage['hostnames'] = {}
 
-        hostname = self.get_hostname()
+        hostname_list = self.get_hostname()
+        if hostname_list is not None:
+            for hostname in hostname_list:
+                if not hostnames.get(hostname):
+                    hostnames[hostname] = {'created': DateTime()}
 
-        if hostname:
-            if not hostnames.get(hostname):
-                hostnames[hostname] = {'created': DateTime()}
-
-            hosts = deepcopy(hostnames)
-            last_ping = storage.get('last_ping')
-            if last_ping:
-                last_ping_date = last_ping.get('date')
-                hostnames_checked = last_ping.get('hostnames')
-                success = last_ping.get('success')
-                new_hostname = hostname not in hostnames_checked.keys()
-                if success:
-                    is_old = DateTime().greaterThan(last_ping_date+7)
-                    if new_hostname or is_old:
-                        self.do_ping(hosts, storage)
+                hosts = deepcopy(hostnames)
+                last_ping = storage.get('last_ping')
+                if last_ping:
+                    last_ping_date = last_ping.get('date')
+                    hostnames_checked = last_ping.get('hostnames')
+                    success = last_ping.get('success')
+                    new_hostname = hostname not in hostnames_checked.keys()
+                    if success:
+                        is_old = DateTime().greaterThan(last_ping_date+7)
+                        if new_hostname or is_old:
+                            self.do_ping(hosts, storage)
+                    else:
+                        is_old = DateTime().greaterThan(last_ping_date+1)
+                        if is_old:
+                            self.do_ping(hosts, storage)
                 else:
-                    is_old = DateTime().greaterThan(last_ping_date+1)
-                    if is_old:
-                        self.do_ping(hosts, storage)
-            else:
-                self.do_ping(hosts, storage)
+                    self.do_ping(hosts, storage)
 
         return None
 
