@@ -4,6 +4,8 @@ Changelog
 2.3.dev0 - (unreleased)
 -----------------------
 
+* Bug fix: get_hostname returns a list and was not propely handled [larremik refs #26682]
+
 2.2 - (2015-06-02)
 ------------------
 * Bug fix: Release a new egg
