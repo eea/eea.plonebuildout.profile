@@ -17,12 +17,17 @@ class EEAFixture(PloneSandboxLayer):
         """
         import eea.plonebuildout.profile
         self.loadZCML(package=eea.plonebuildout.profile)
+
         z2.installProduct(app, 'eea.plonebuildout.profile')
+        z2.installProduct(app, 'Products.ATVocabularyManager')
+        z2.installProduct(app, 'eea.relations')
 
     def tearDownZope(self, app):
         """ Uninstall Zope
         """
         z2.uninstallProduct(app, 'eea.plonebuildout.profile')
+        z2.uninstallProduct(app, 'Products.ATVocabularyManager')
+        z2.uninstallProduct(app, 'eea.relations')
 
     def setUpPloneSite(self, portal):
         """ Setup Plone

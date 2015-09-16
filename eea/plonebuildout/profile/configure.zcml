@@ -1,20 +1,18 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    i18n_domain="eea.plonebuildout.profile">
+  xmlns="http://namespaces.zope.org/zope"
+  i18n_domain="eea">
 
-    <includeDependencies package="."/>
-    <include package="eea.daviz" file="full.zcml" />
+  <includeDependencies package="." />
+  <include package="eea.daviz" file="full.zcml" />
 
-    <include file="profiles.zcml" />
+  <include file="profiles.zcml" />
 
-    <include package=".browser" />
-    <include package=".upgrades" />
+  <include package=".browser" />
+  <include package=".upgrades" />
 
-    <!-- Make the zope root annotatable -->
-    <class class="OFS.Application.Application">
-        <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
-    </class>
+  <!-- Make the zope root annotatable -->
+  <class class="OFS.Application.Application">
+    <implements interface="zope.annotation.interfaces.IAttributeAnnotatable" />
+  </class>
 
 </configure>
