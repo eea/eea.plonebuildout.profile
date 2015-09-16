@@ -1,9 +1,11 @@
 <configure
   xmlns="http://namespaces.zope.org/zope"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
   <includeDependencies package="." />
   <include package="eea.daviz" file="full.zcml" />
+  <include package="plone.app.ldap" zcml:condition="installed plone.app.ldap" />
 
   <include file="profiles.zcml" />
 
