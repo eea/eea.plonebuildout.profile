@@ -4,30 +4,13 @@
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     i18n_domain="eea.plonebuildout.profile">
 
-    <five:registerPackage package="." initialize=".initialize" />
+    <includeDependencies package="."/>
+    <include package="eea.daviz" file="full.zcml" />
+
+    <include file="profiles.zcml" />
 
     <include package=".browser" />
     <include package=".upgrades" />
-
-    <genericsetup:registerProfile
-        name="default"
-        title="EEA Plone Buildout Profile"
-        directory="profiles/default"
-        description="Install all core EEA packages"
-        provides="Products.GenericSetup.interfaces.EXTENSION" />
-
-    <genericsetup:registerProfile
-        name="ldap"
-        title="EEA Plone buildout profile (LDAP)"
-        directory="profiles/ldap"
-        description="Install and configure EIONET LDAP using plone.app.ldap"
-        provides="Products.GenericSetup.interfaces.EXTENSION" />
-
-    <genericsetup:importStep
-        name="eea.plonebuildout.profile.various"
-        title="EEA Plone buildout profile setup"
-        description="Setup EEA Plone buildout profile"
-        handler="eea.plonebuildout.profile.setuphandlers.setupVarious" />
 
     <!-- Make the zope root annotatable -->
     <class class="OFS.Application.Application">
