@@ -11,7 +11,7 @@
 
     <genericsetup:registerProfile
         name="default"
-        title="EEA Plone buildout profile"
+        title="EEA Plone Buildout Profile"
         directory="profiles/default"
         description="Install all core EEA packages"
         provides="Products.GenericSetup.interfaces.EXTENSION" />
