@@ -3,6 +3,8 @@ Changelog
 
 2.5.dev0 - (unreleased)
 -----------------------
+* Bug fix: Don't show any viewlet if this package is not installed
+  [voineali refs #68842]
 
 2.4 - (2015-09-17)
 ------------------

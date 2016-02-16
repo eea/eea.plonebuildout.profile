@@ -1,4 +1,4 @@
-<configure 
+<configure
     xmlns:browser="http://namespaces.zope.org/browser">
 
     <browser:viewlet
@@ -21,9 +21,11 @@
 
     <browser:viewlet
         name="eea.requiredpkgs"
+        layer="eea.plonebuildout.profile.interfaces.IPloneBuildoutProfileLayer"
         manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
         class=".viewlets.RequiredPkgsViewlet"
         permission="cmf.ManagePortal"
         template="templates/requiredpkgs.pt"
         />
+
 </configure>
