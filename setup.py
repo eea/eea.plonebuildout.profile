@@ -31,6 +31,7 @@ setup(name='eea.plonebuildout.profile',
           # -*- Extra requirements: -*-
           'Products.kupu',
           'five.intid',
+          'collective.warmup',
           'edw.userhistory',
           'eea.alchemy',
           'eea.annotator',

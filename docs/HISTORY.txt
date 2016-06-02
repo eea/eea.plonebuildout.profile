@@ -3,6 +3,8 @@ Changelog
 
 2.6.dev0 - (unreleased)
 -----------------------
+* Change: Add dependency to collective.warmup
+  [voineali refs #72395]
 
 2.5 - (2016-02-16)
 ------------------
