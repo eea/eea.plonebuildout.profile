@@ -51,6 +51,7 @@ setup(name='eea.plonebuildout.profile',
           'eea.tinymce',
           'eea.translations',
           'eea.uberlisting',
+          'eea.async.manager',
       ],
       entry_points="""
       # -*- Entry points: -*-

@@ -3,6 +3,8 @@ Changelog
 
 2.8.dev0 - (unreleased)
 -----------------------
+* Change: Add dependency to eea.async.manager
+  [voineali refs #80206]
 
 2.7 - (2016-07-07)
 ------------------
