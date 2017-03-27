@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.0.dev0 - (unreleased)
------------------------
+3.0 - (2017-03-27)
+------------------
 * Bug fix: Fixed  JS error `TypeError: _widget` when eea.indicators is installed
   [avoinea refs #83106]
 * Change: Do not load eea.relations.default SchemaModifier if `eea.design` is installed
