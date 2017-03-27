@@ -4,8 +4,8 @@
   i18n_domain="eea">
 
   <includeDependencies package="." />
-  <include package="eea.daviz" file="full.zcml" />
   <include package="plone.app.ldap" zcml:condition="installed plone.app.ldap" />
+  <include package="eea.relations.default" zcml:condition="not-installed eea.design" />
 
   <include file="profiles.zcml" />
 

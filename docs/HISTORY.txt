@@ -3,6 +3,12 @@ Changelog
 
 3.0.dev0 - (unreleased)
 -----------------------
+* Bug fix: Fixed  JS error `TypeError: _widget` when eea.indicators is installed
+  [avoinea refs #83106]
+* Change: Do not load eea.relations.default SchemaModifier if `eea.design` is installed
+  [avoinea refs #83106]
+* Change: Remove `[full]` dependency on eea.daviz
+  [avoinea refs #83106]
 * Change: Remove dependency to Products.kupu
   [avoinea]
 
@@ -33,7 +39,8 @@ Changelog
 
 2.3 - (2015-07-21)
 ------------------
-* Bug fix: get_hostname returns a list and was not propely handled [larremik refs #26682]
+* Bug fix: get_hostname returns a list and was not propely handled
+  [larremik refs #26682]
 
 2.2 - (2015-06-02)
 ------------------
