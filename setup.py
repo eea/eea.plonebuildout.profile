@@ -29,7 +29,6 @@ setup(name='eea.plonebuildout.profile',
           'requests>=2.4.0',
           'setuptools',
           # -*- Extra requirements: -*-
-          'Products.kupu',
           'five.intid',
           'collective.warmup',
           'edw.userhistory',
