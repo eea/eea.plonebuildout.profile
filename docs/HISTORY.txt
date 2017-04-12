@@ -1,8 +1,8 @@
 Changelog
 =========
 
-3.1 - (2017-04-12)
-------------------
+3.1.dev0 - (unreleased)
+-----------------------
 * Feature: enabled eea.similarity as a default add-on for EEA CPB
   [alecghica refs #82296]
 
