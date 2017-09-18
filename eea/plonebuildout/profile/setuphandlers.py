@@ -3,11 +3,9 @@
 from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
 try:
-    import plone.app.ldap
+    from plone.app import ldap
 except ImportError:
-    LDAP_INSTALLED = False
-else:
-    LDAP_INSTALLED = True
+    ldap = None
 
 
 def setupLDAP():
@@ -28,5 +26,5 @@ def setupVarious(context):
         return
 
     # LDAP support is available
-    if LDAP_INSTALLED:
+    if ldap is not None:
         setupLDAP()

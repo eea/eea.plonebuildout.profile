@@ -7,6 +7,7 @@ import requests
 
 from App.config import getConfiguration
 from DateTime import DateTime
+from Globals import INSTANCE_HOME
 from Products.CMFCore.utils import getToolByName
 from copy import deepcopy
 from distutils import version as vt
