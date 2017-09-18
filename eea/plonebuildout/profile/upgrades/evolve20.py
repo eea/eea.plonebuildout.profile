@@ -3,14 +3,14 @@
 import logging
 from zope.component.hooks import getSite
 from Products.CMFCore.utils import getToolByName
-from eea.plonebuildout.profile.setuphandlers import LDAP_INSTALLED
+from eea.plonebuildout.profile.setuphandlers import ldap
 from eea.plonebuildout.profile.setuphandlers import setupLDAP
 logger = logging.getLogger('eea.plonebuildout.profile')
 
 def migrate2plone_app_ldap(context):
     """ Fix comments without id and creation date
     """
-    if not LDAP_INSTALLED:
+    if ldap is None:
         logger.warn("plone.app.ldap not present. Nothing to migrate.")
         return "plone.app.ldap not present. Nothing to migrate."
 
