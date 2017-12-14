@@ -1,15 +1,15 @@
 """Viewlets for eea.plonebuildout.profile
 """
 import os
-from time import time
 import logging
 import requests
+import contextlib
+from time import time
 
 from DateTime import DateTime
-from Globals import INSTANCE_HOME
 from Products.CMFCore.utils import getToolByName
 from copy import deepcopy
-from distutils import version as vt
+from distutils.version import StrictVersion
 from eea.plonebuildout.profile.browser.utils import get_storage
 from eea.plonebuildout.profile.browser.utils import REQUIRED_PKGS
 from plone.app.layout.viewlets.common import ViewletBase
@@ -17,6 +17,7 @@ from plone.memoize import ram
 
 logger = logging.getLogger('eea.plonebuildout.profile')
 EEA_ANALYTICS_URL = 'http://www.eea.europa.eu/@@eea.controlpaneleeacpbstatusagent.html'
+EEA_KGS_URL = "https://api.github.com/repos/eea/eea.docker.kgs/tags"
 READ_TIMEOUT = 3.0
 CONNECT_TIMEOUT = 3.0
 
@@ -35,16 +36,21 @@ class NewReleaseViewlet(ViewletBase):
         if not kgsver:
             logger.warn("EEA_KGS_VERSION is not defined as environment "
                         "variable. Please use proper buildout configuration")
-            return
+            return None
 
-        url = "https://api.github.com/repos/eea/eea.docker.kgs/tags"
-        with requests.get(url) as conn:
-            tags = c.json()
-            for tag in tags:
-                last = tag.get('name', None)
+        with contextlib.closing(requests.get(EEA_KGS_URL)) as conn:
+            tags = conn.json()
+            if not (tags and isinstance(tags, list)):
+                logger.warn("Could not retrive KGS version at %s", EEA_KGS_URL)
+                return None
+
+            last = tags[0].get('name', None)
+            try:
+                if StrictVersion(last) > StrictVersion(kgsver):
+                    return last
+            except (ValueError, AttributeError):
                 if last != kgsver:
                     return last
-                break
         return None
 
 
