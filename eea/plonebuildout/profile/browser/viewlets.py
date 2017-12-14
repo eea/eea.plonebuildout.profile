@@ -1,11 +1,10 @@
 """Viewlets for eea.plonebuildout.profile
 """
+import os
 from time import time
 import logging
-import os.path
 import requests
 
-from App.config import getConfiguration
 from DateTime import DateTime
 from Globals import INSTANCE_HOME
 from Products.CMFCore.utils import getToolByName
@@ -32,66 +31,20 @@ class NewReleaseViewlet(ViewletBase):
         """Return a version number if running old KGS version, otherwise None
         """
 
-        conf = getConfiguration()
-        env = getattr(conf, 'environment', {})
-
-        kgsver = str(env.get("EEA_KGS_VERSION", None))
-        if kgsver is None:
-            logger.info("EEA_KGS_VERSION is not defined as environment "
+        kgsver = str(os.environ.get("EEA_KGS_VERSION", ''))
+        if not kgsver:
+            logger.warn("EEA_KGS_VERSION is not defined as environment "
                         "variable. Please use proper buildout configuration")
             return
 
-        url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
-              "contents/buildout-configs/kgs"
-        c = requests.get(url)
-        j = c.json()
-        dirs = []
-
-        # Treat case where github does not return proper json response
-        if isinstance(j, list):
-            for r in j:
-                if r.get('type') == 'dir':
-                    name = r['name']
-                    if name[0].isdigit():
-                        dirs.append(r.get('name'))
-        else:
-            logger.info("Invalid response from github: " + c.text)
-
-        if not dirs:
-            logger.info("Could not determine proper EEA KGS releases")
-            return
-
-        versions = [vt.StrictVersion(v) for v in dirs]
-        versions.sort()
-        last = str(versions[-1]) #always assume at least one release
-
-        if last != kgsver:
-            return last
-
-        return None
-
-    @ram.cache(lambda *args:time() // (60*60*24))
-    def last_buildout_update(self):
-        """
-        Return the revision of the current buildout cfgs
-        and the latest revision on Github if different, None otherwise
-        Keys: `current` and `latest`
-
-        """
-        current_rev = None
-        pin_file = os.path.join(INSTANCE_HOME, "..", "..", ".current_revision")
-        if os.path.exists(pin_file):
-            current_rev = open(pin_file).read().strip()
-
-        url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
-              "commits/HEAD"
-        c = requests.get(url)
-        j = c.json()
-        latest_rev = j.get('sha')
-
-        if latest_rev and latest_rev != current_rev:
-            return {'current': current_rev, 'latest': latest_rev}
-
+        url = "https://api.github.com/repos/eea/eea.docker.kgs/tags"
+        with requests.get(url) as conn:
+            tags = c.json()
+            for tag in tags:
+                last = tag.get('name', None)
+                if last != kgsver:
+                    return last
+                break
         return None
 
 
