@@ -26,23 +26,28 @@ class NewReleaseViewlet(ViewletBase):
     """A viewlet which informs managers of new EEA KGS releases
     """
 
+    def current_kgs_version(self):
+        """ Get current KGS version running on
+        """
+        return os.environ.get("EEA_KGS_VERSION", '')
+
     #we cache the result for 24 hours
     @ram.cache(lambda *args:time() // (60*60*24))
     def last_kgs_update(self):
         """Return a version number if running old KGS version, otherwise None
         """
 
-        kgsver = str(os.environ.get("EEA_KGS_VERSION", ''))
+        kgsver = self.current_kgs_version()
         if not kgsver:
             logger.warn("EEA_KGS_VERSION is not defined as environment "
                         "variable. Please use proper buildout configuration")
-            return None
+            return ''
 
         with contextlib.closing(requests.get(EEA_KGS_URL)) as conn:
             tags = conn.json()
             if not (tags and isinstance(tags, list)):
                 logger.warn("Could not retrive KGS version at %s", EEA_KGS_URL)
-                return None
+                return ''
 
             last = tags[0].get('name', None)
             try:
@@ -51,7 +56,7 @@ class NewReleaseViewlet(ViewletBase):
             except (ValueError, AttributeError):
                 if last != kgsver:
                     return last
-        return None
+        return ''
 
 
 class AnalyticsViewlet(ViewletBase):

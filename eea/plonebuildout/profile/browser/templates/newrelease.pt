@@ -1,8 +1,8 @@
 <tal:metal tal:condition="context/@@plone_context_state/is_view_template">
     <dl class="portalMessage error" tal:condition="view/last_kgs_update" i18n:translate="eea_kgs_new_version">
         <dt>
-        You are running on an old EEA KGS version, there is a new version
-        released: <span tal:content="view/last_kgs_update" i18n:name="version" />
+          You are running on an old EEA KGS version: <tal:version tal:replace="view/current_kgs_version" i18n:name="current" />
+          The latest version released is: <tal:version tal:replace="view/last_kgs_update" i18n:name="version" />
         </dt>
     <dd>&nbsp;</dd>
     </dl>
