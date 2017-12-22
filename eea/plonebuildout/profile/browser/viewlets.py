@@ -1,16 +1,15 @@
 """Viewlets for eea.plonebuildout.profile
 """
-from time import time
+import os
 import logging
-import os.path
 import requests
+import contextlib
+from time import time
 
-from App.config import getConfiguration
 from DateTime import DateTime
-from Globals import INSTANCE_HOME
 from Products.CMFCore.utils import getToolByName
 from copy import deepcopy
-from distutils import version as vt
+from distutils.version import StrictVersion
 from eea.plonebuildout.profile.browser.utils import get_storage
 from eea.plonebuildout.profile.browser.utils import REQUIRED_PKGS
 from plone.app.layout.viewlets.common import ViewletBase
@@ -18,6 +17,7 @@ from plone.memoize import ram
 
 logger = logging.getLogger('eea.plonebuildout.profile')
 EEA_ANALYTICS_URL = 'http://www.eea.europa.eu/@@eea.controlpaneleeacpbstatusagent.html'
+EEA_KGS_URL = "https://api.github.com/repos/eea/eea.docker.kgs/tags"
 READ_TIMEOUT = 3.0
 CONNECT_TIMEOUT = 3.0
 
@@ -26,73 +26,37 @@ class NewReleaseViewlet(ViewletBase):
     """A viewlet which informs managers of new EEA KGS releases
     """
 
+    def current_kgs_version(self):
+        """ Get current KGS version running on
+        """
+        return os.environ.get("EEA_KGS_VERSION", '')
+
     #we cache the result for 24 hours
     @ram.cache(lambda *args:time() // (60*60*24))
     def last_kgs_update(self):
         """Return a version number if running old KGS version, otherwise None
         """
 
-        conf = getConfiguration()
-        env = getattr(conf, 'environment', {})
-
-        kgsver = str(env.get("EEA_KGS_VERSION", None))
-        if kgsver is None:
-            logger.info("EEA_KGS_VERSION is not defined as environment "
+        kgsver = self.current_kgs_version()
+        if not kgsver:
+            logger.warn("EEA_KGS_VERSION is not defined as environment "
                         "variable. Please use proper buildout configuration")
-            return
+            return ''
 
-        url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
-              "contents/buildout-configs/kgs"
-        c = requests.get(url)
-        j = c.json()
-        dirs = []
+        with contextlib.closing(requests.get(EEA_KGS_URL)) as conn:
+            tags = conn.json()
+            if not (tags and isinstance(tags, list)):
+                logger.warn("Could not retrive KGS version at %s", EEA_KGS_URL)
+                return ''
 
-        # Treat case where github does not return proper json response
-        if isinstance(j, list):
-            for r in j:
-                if r.get('type') == 'dir':
-                    name = r['name']
-                    if name[0].isdigit():
-                        dirs.append(r.get('name'))
-        else:
-            logger.info("Invalid response from github: " + c.text)
-
-        if not dirs:
-            logger.info("Could not determine proper EEA KGS releases")
-            return
-
-        versions = [vt.StrictVersion(v) for v in dirs]
-        versions.sort()
-        last = str(versions[-1]) #always assume at least one release
-
-        if last != kgsver:
-            return last
-
-        return None
-
-    @ram.cache(lambda *args:time() // (60*60*24))
-    def last_buildout_update(self):
-        """
-        Return the revision of the current buildout cfgs
-        and the latest revision on Github if different, None otherwise
-        Keys: `current` and `latest`
-
-        """
-        current_rev = None
-        pin_file = os.path.join(INSTANCE_HOME, "..", "..", ".current_revision")
-        if os.path.exists(pin_file):
-            current_rev = open(pin_file).read().strip()
-
-        url = "https://api.github.com/repos/eea/eea.plonebuildout.core/"\
-              "commits/HEAD"
-        c = requests.get(url)
-        j = c.json()
-        latest_rev = j.get('sha')
-
-        if latest_rev and latest_rev != current_rev:
-            return {'current': current_rev, 'latest': latest_rev}
-
-        return None
+            last = tags[0].get('name', None)
+            try:
+                if StrictVersion(last) > StrictVersion(kgsver):
+                    return last
+            except (ValueError, AttributeError):
+                if last != kgsver:
+                    return last
+        return ''
 
 
 class AnalyticsViewlet(ViewletBase):
