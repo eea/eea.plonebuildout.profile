@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.5 - (2018-02-02)
+------------------
+* Feature: Added dependency on ftw.globalstatusmessage
+  [avoinea refs #92245]
+
 3.4 - (2017-12-22)
 ------------------
 * Change: Update latest release viewlet to check over eea.docker.kgs
