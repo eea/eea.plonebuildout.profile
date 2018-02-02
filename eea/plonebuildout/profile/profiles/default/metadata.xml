@@ -16,6 +16,7 @@
   <dependency>profile-eea.tinymce:default</dependency>
   <dependency>profile-eea.uberlisting:default</dependency>
   <dependency>profile-eea.cache:default</dependency>
+  <dependency>profile-ftw.globalstatusmessage:default</dependency>
  </dependencies>
 
 </metadata>
