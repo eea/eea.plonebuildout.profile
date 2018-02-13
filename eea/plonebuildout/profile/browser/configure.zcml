@@ -28,4 +28,12 @@
         template="templates/requiredpkgs.pt"
         />
 
+    <browser:viewlet
+        name="ftw.globalstatusmessage.statusmessageviewlet"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+        class="ftw.globalstatusmessage.browser.viewlets.statusmessage.StatusmessageViewlet"
+        layer="ftw.globalstatusmessage.interfaces.IGlobalStatusMessageLayer"
+        permission="zope2.View"
+        />
+
 </configure>
