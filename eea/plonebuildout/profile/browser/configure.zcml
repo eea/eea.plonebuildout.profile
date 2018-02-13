@@ -30,7 +30,7 @@
 
     <browser:viewlet
         name="ftw.globalstatusmessage.statusmessageviewlet"
-        manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
         class="ftw.globalstatusmessage.browser.viewlets.statusmessage.StatusmessageViewlet"
         layer="ftw.globalstatusmessage.interfaces.IGlobalStatusMessageLayer"
         permission="zope2.View"
