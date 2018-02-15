@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
  <description>eea.plonebuildout.profile profile</description>
- <version>2.0</version>
+ <version>3.5</version>
 
  <dependencies>
   <dependency>profile-eea.depiction:default</dependency>
@@ -16,6 +16,7 @@
   <dependency>profile-eea.tinymce:default</dependency>
   <dependency>profile-eea.uberlisting:default</dependency>
   <dependency>profile-eea.cache:default</dependency>
+  <dependency>profile-ftw.globalstatusmessage:default</dependency>
  </dependencies>
 
 </metadata>
