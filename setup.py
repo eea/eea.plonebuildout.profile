@@ -39,6 +39,7 @@ setup(name='eea.plonebuildout.profile',
           # -*- Extra requirements: -*-
           'five.intid',
           'ftw.globalstatusmessage',
+          'ftw.copymovepatches',
           'collective.warmup',
           'edw.userhistory',
           'eea.alchemy',

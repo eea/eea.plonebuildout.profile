@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.6 - (2018-03-01)
+------------------
+* Feature: Added dependency on ftw.copymovepatches in order to speedup Cut/Copy operations
+  [avoinea refs #92869]
+
 3.5 - (2018-02-02)
 ------------------
 * Feature: Added dependency on ftw.globalstatusmessage
