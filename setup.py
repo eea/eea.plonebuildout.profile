@@ -62,6 +62,7 @@ setup(name='eea.plonebuildout.profile',
           'eea.uberlisting',
           'eea.async.manager',
           'eea.similarity',
+          'raven',
       ],
       entry_points="""
       # -*- Entry points: -*-

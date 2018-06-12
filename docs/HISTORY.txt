@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.8 - (2018-06-12)
+---------------------
+* Feature: Add custom raven processors to cleanup Zope REQUEST
+  [avoinea refs #95646]
+
 3.7 - (2018-06-12)
 ------------------
 * Change: show new kgs version as warning instead of error in order to avoid
@@ -166,4 +171,3 @@ Changelog
 * Initial release. A simple GS profile that depends on all the core EEA
   packages and sets up the LDAP based user authentication.
   [tiberich #14827]
-
