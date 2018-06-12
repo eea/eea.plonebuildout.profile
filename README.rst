@@ -1,7 +1,11 @@
 EEA Plone Buildout Profile
 ==========================
-.. image:: http://ci.eionet.europa.eu/job/eea/job/eea.plonebuildout.profile/job/master/badge/icon
-  :target: http://ci.eionet.europa.eu/job/eea/job/eea.plonebuildout.profile/job/master/display/redirect
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.plonebuildout.profile/develop
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.plonebuildout.profile/job/develop/display/redirect
+  :alt: develop
+.. image:: https://ci.eionet.europa.eu/buildStatus/icon?job=eea/eea.plonebuildout.profile/master
+  :target: https://ci.eionet.europa.eu/job/eea/job/eea.plonebuildout.profile/job/master/display/redirect
+  :alt: master
 
 This product is a simple Plone profile that depends on all EEA core
 packages. Its purpose is to enable simple instalation of those packages,
