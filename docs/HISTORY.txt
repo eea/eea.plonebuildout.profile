@@ -1,9 +1,17 @@
 Changelog
 =========
 
+3.7 - (2018-06-12)
+------------------
+* Change: show new kgs version as warning instead of error in order to avoid
+  ajax loading of the error instead of having a page redirect on login popup
+  form
+  [ichim-david refs #92454]
+
 3.6 - (2018-03-01)
 ------------------
-* Feature: Added dependency on ftw.copymovepatches in order to speedup Cut/Copy operations
+* Feature: Added dependency on ftw.copymovepatches in order to speedup Cut/Copy
+  operations
   [avoinea refs #92869]
 
 3.5 - (2018-02-02)
@@ -35,7 +43,8 @@ Changelog
 ------------------
 * Bug fix: Fixed  JS error `TypeError: _widget` when eea.indicators is installed
   [avoinea refs #83106]
-* Change: Do not load eea.relations.default SchemaModifier if `eea.design` is installed
+* Change: Do not load eea.relations.default SchemaModifier if `eea.design` is
+  installed
   [avoinea refs #83106]
 * Change: Remove `[full]` dependency on eea.daviz
   [avoinea refs #83106]
