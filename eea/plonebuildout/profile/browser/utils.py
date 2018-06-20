@@ -5,21 +5,21 @@ KEY = "eea.plonebuildout.profile"
 REQUIRED_PKGS = [
     {'pkg_id': 'eea.rdfmarshaller', 'url': ''},
     {'pkg_id': 'eea.tags',
-     'url': 'http://eea.github.io/docs/eea.tags/index.html'},
+     'url': 'https://eea.github.io/docs/eea.tags/index.html'},
     {'pkg_id': 'eea.translations', 'url': ''},
     {'pkg_id': 'eea.tinymce',
-     'url': 'http://eea.github.io/docs/eea.tinymce/index.html'},
+     'url': 'https://eea.github.io/docs/eea.tinymce/index.html'},
     {'pkg_id': 'eea.uberlisting',
-     'url': 'http://eea.github.io/docs/eea.uberlisting/index.html'},
+     'url': 'https://eea.github.io/docs/eea.uberlisting/index.html'},
     {'pkg_id': 'eea.relations',
-     'url': 'http://eea.github.io/docs/eea.relations/index.html'},
+     'url': 'https://eea.github.io/docs/eea.relations/index.html'},
     {'pkg_id': 'eea.plonebuildout.profile', 'url': ''},
     {'pkg_id': 'eea.facetednavigation',
-     'url': 'http://eea.github.io/docs/eea.facetednavigation/index.html'},
+     'url': 'https://eea.github.io/docs/eea.facetednavigation/index.html'},
     {'pkg_id': 'eea.faceted.vocabularies',
-     'url': 'http://eea.github.io/docs/eea.faceted.vocabularies/index.html'},
+     'url': 'https://eea.github.io/docs/eea.faceted.vocabularies/index.html'},
     {'pkg_id': 'eea.faceted.inheritance',
-     'url': 'http://eea.github.io/docs/eea.faceted.inheritance/index.html'}
+     'url': 'https://eea.github.io/docs/eea.faceted.inheritance/index.html'}
 ]
 
 

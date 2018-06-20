@@ -3,6 +3,8 @@ Changelog
 
 3.9-dev0 - (unreleased)
 ---------------------
+* Change: updated URLs pointing to eea.europa.eu with https://
+  [alecghica refs #95849]
 
 3.8 - (2018-06-12)
 ---------------------
