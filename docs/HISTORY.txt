@@ -3,6 +3,8 @@ Changelog
 
 4.0-dev0 - (unreleased)
 ---------------------
+* Feature: added 'cssselect' as dependency, required by lxml version 3.x
+  [alecghica refs #96974]
 
 3.9 - (2018-06-20)
 ---------------------

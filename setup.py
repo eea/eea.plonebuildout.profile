@@ -63,6 +63,7 @@ setup(name='eea.plonebuildout.profile',
           'eea.async.manager',
           'eea.similarity',
           'raven',
+          'cssselect',
       ],
       entry_points="""
       # -*- Entry points: -*-
