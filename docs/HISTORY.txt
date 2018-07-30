@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.0 - (2018-07-30)
+---------------------
+* Feature: added 'cssselect' as dependency, required by lxml version 3.x
+  [alecghica refs #96974]
+
 3.9 - (2018-06-20)
 ---------------------
 * Change: updated URLs pointing to eea.europa.eu with https://
