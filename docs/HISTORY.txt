@@ -3,6 +3,8 @@ Changelog
 
 4.1-dev0 - (unreleased)
 ---------------------
+* Cleanup: Remove eea.socialmedia dependency
+  [avoinea refs #95341]
 
 4.0 - (2018-07-30)
 ---------------------
