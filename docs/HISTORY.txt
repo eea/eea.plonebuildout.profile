@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.1 - (2018-09-10)
+---------------------
+* Cleanup: Remove eea.socialmedia dependency
+  [avoinea refs #95341]
+
 4.0 - (2018-07-30)
 ---------------------
 * Feature: added 'cssselect' as dependency, required by lxml version 3.x

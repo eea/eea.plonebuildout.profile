@@ -10,7 +10,6 @@
   <dependency>profile-eea.geotags:default</dependency>
   <dependency>profile-eea.rdfmarshaller:default</dependency>
   <dependency>profile-eea.relations:default</dependency>
-  <dependency>profile-eea.socialmedia:default</dependency>
   <dependency>profile-eea.tags:default</dependency>
   <dependency>profile-eea.translations:default</dependency>
   <dependency>profile-eea.tinymce:default</dependency>
