@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<object name="portal_javascripts">
+ <javascript id="++resource++jquery-migrate.js" insert-after="++resource++plone.app.jquery.js" bundle="jquery" />
+</object>
