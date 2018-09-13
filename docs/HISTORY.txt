@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.3-dev0 - (unreleased)
+---------------------
+
 4.2 - (2018-09-12)
 ---------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
