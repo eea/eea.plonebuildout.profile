@@ -1,6 +1,14 @@
 Changelog
 =========
 
+4.2 - (2018-09-12)
+---------------------
+* Upgrade step: Within "Plone > Site setup > Add-ons" click on
+  upgrade button available for EEA Plone buildout profile.
+  [avoinea refs #95172]
+* Change: Include jquery-migrate plugin
+  [avoinea refs #95172]
+
 4.1 - (2018-09-10)
 ---------------------
 * Cleanup: Remove eea.socialmedia dependency

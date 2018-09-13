@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <metadata>
  <description>eea.plonebuildout.profile profile</description>
- <version>3.5</version>
+ <version>4.2</version>
 
  <dependencies>
   <dependency>profile-eea.depiction:default</dependency>
