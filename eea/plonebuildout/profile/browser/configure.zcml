@@ -11,15 +11,6 @@
         />
 
     <browser:viewlet
-        name="eea.analytics"
-        layer="eea.plonebuildout.profile.interfaces.IPloneBuildoutProfileLayer"
-        manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"
-        class=".viewlets.AnalyticsViewlet"
-        permission="zope2.View"
-        template="templates/analytics.pt"
-        />
-
-    <browser:viewlet
         name="eea.requiredpkgs"
         layer="eea.plonebuildout.profile.interfaces.IPloneBuildoutProfileLayer"
         manager="plone.app.layout.viewlets.interfaces.IAboveContentTitle"

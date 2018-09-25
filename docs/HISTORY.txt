@@ -3,6 +3,8 @@ Changelog
 
 4.3-dev0 - (unreleased)
 ---------------------
+* Cleanup: Remove eea.controlpanel dependency
+  [avoinea refs #95687]
 
 4.2 - (2018-09-12)
 ---------------------
