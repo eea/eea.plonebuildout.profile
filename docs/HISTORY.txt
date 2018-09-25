@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.3 - (2018-09-25)
+---------------------
+* Cleanup: Remove eea.controlpanel dependency
+  [avoinea refs #95687]
+
 4.2 - (2018-09-12)
 ---------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
