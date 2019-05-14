@@ -61,7 +61,7 @@ setup(name='eea.plonebuildout.profile',
           'eea.uberlisting',
           'eea.async.manager',
           'eea.similarity',
-          'raven',
+          'eea.sentry',
           'cssselect',
       ],
       entry_points="""
