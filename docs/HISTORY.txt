@@ -3,6 +3,8 @@ Changelog
 
 4.5 - (2019-05-16)
 ---------------------
+* Change: Moved raven processor to Sentry dedicated package eea.sentry
+  [avoinea refs #104872]
 
 4.4 - (2019-01-28)
 ---------------------
