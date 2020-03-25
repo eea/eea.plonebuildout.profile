@@ -1,0 +1,3 @@
+<link rel="manifest" href="/manifest.json" data-diazo="mandatory"/>
+<link rel="apple-touch-icon" href="/icon-192x192.png" data-diazo="mandatory"/>
+<meta name="theme-color" content="${view/get_theme_color}"/>

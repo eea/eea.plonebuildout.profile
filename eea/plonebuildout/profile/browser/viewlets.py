@@ -12,6 +12,11 @@ from eea.plonebuildout.profile.browser.utils import REQUIRED_PKGS
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
 
+from zope.component import getUtility
+from eea.plonebuildout.profile.controlpanel.manifest_json import IManifestJsonSettings
+from plone import api
+from plone.registry.interfaces import IRegistry
+
 logger = logging.getLogger('eea.plonebuildout.profile')
 EEA_KGS_URL = "https://api.github.com/repos/eea/eea.docker.kgs/tags"
 READ_TIMEOUT = 3.0
@@ -91,3 +96,17 @@ class RequiredPkgsViewlet(ViewletBase):
                         missing[pkg_id] = missing_pkg
 
         return missing
+
+class ManifestJsonViewlet(ViewletBase):
+    def get_manifest_json_settings(self):
+        """ Return the settings as set in site/@@pwa-controlpanel
+
+            Usage: s.name
+        """
+        registry = getUtility(IRegistry, context=api.portal.get())
+        s = registry.forInterface(IManifestJsonSettings)
+        return s
+
+    def get_theme_color(self):
+        settings = self.get_manifest_json_settings()
+        return settings.theme_color

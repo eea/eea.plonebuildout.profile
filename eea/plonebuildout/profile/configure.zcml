@@ -11,6 +11,7 @@
 
   <include package=".browser" />
   <include package=".upgrades" />
+  <include package=".controlpanel" />
 
   <!-- Make the zope root annotatable -->
   <class class="OFS.Application.Application">
