@@ -1,10 +1,7 @@
 import json
-from Products.CMFPlone.utils import isExpired
 from Products.Five.browser import BrowserView
 from eea.plonebuildout.profile.controlpanel.manifest_json import IManifestJsonSettings
 from zope.component import getUtility
-from ZPublisher.HTTPResponse import HTTPResponse
-#from http.client import HTTPResponse
 from plone import api
 from plone.registry.interfaces import IRegistry
 
