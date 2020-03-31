@@ -2,12 +2,12 @@
     xmlns:browser="http://namespaces.zope.org/browser">
 
     <browser:page
-      name="manifest.json"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      permission="zope2.View"
+        name="manifest.json"
+        for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+        permission="zope2.View"
         template="templates/manifestjson.pt"
-      class=".manifestjson.ManifestJsonView"
-      />
+        class=".manifestjson.ManifestJsonView"
+        />
 
     <browser:viewlet
         name="manifest.json.viewlet"
