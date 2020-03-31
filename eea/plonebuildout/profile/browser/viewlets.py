@@ -104,9 +104,15 @@ class ManifestJsonViewlet(ViewletBase):
             Usage: s.name
         """
         registry = getUtility(IRegistry, context=api.portal.get())
-        s = registry.forInterface(IManifestJsonSettings)
+        try:
+            s = registry.forInterface(IManifestJsonSettings)
+        except:
+            s = object()
         return s
 
     def get_theme_color(self):
         settings = self.get_manifest_json_settings()
-        return settings.theme_color
+        if hasattr(settings, 'theme_color'):
+            return settings.theme_color
+
+        return ''

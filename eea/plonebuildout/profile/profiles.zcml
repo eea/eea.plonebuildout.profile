@@ -27,10 +27,10 @@
     handler="eea.plonebuildout.profile.setuphandlers.setupVarious" />
 
   <genericsetup:registerProfile
-    name="eea.plonebuildout.profile_upgrade.4.6"
-    title="Upgrade profile for EEAPlonebuildoutProfile 4.6"
-    description="This profile contains configuration changes from 4.5 to 4.6"
-    directory="profiles/upgrade/to_46"
+    name="upgrade.4.3"
+    title="Upgrade profile for EEAPlonebuildoutProfile 4.3"
+    description="This profile contains configuration changes from 4.2 to 4.3"
+    directory="profiles/upgrade/to_42"
     provides="Products.GenericSetup.interfaces.EXTENSION" />
 
 </configure>
