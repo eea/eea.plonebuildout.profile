@@ -1,7 +1,7 @@
 Changelog
 =========
 
-4.6-dev0 - (unreleased)
+4.6 - (2020-04-01)
 --------------------------
 * Feature: implemented Manifest.json renderer and editing tools.
   [iugin refs #115143]
