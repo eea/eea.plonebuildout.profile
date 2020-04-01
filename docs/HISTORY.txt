@@ -3,6 +3,8 @@ Changelog
 
 4.6-dev0 - (unreleased)
 ---------------------
+* Feature: implemented Manifest.json renderer and editing tools.
+  [iugin refs #115143]
 
 4.5 - (2019-05-16)
 ---------------------

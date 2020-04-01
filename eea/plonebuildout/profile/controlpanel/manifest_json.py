@@ -17,10 +17,10 @@ class IManifestJsonSettings(Interface):
 
     short_name = TextLine(title=u"Short name", required=True, default=u"")
     name = TextLine(title=u"Name", required=True, default=u"")
-    start_url = TextLine(title=u"Start url", required=True, default=u"")
+    start_url = TextLine(title=u"Start URL", required=True, default=u"")
     background_color = TextLine(title=u"Background color", required=True, default=u"")
-    display = TextLine(title=u"display", required=True, default=u"")
-    scope = TextLine(title=u"scope", required=True, default=u"")
+    display = TextLine(title=u"Display", required=True, default=u"")
+    scope = TextLine(title=u"Scope", required=True, default=u"")
     theme_color = TextLine(title=u"Theme color", required=True, default=u"")
 
 
@@ -31,7 +31,7 @@ class ManifestJsonControlPanelForm(RegistryEditForm):
 
 ManifestJsonControlPanelView = layout.wrap_form(
     ManifestJsonControlPanelForm, ControlPanelFormWrapper)
-ManifestJsonControlPanelView.label = u"ManifestJson settings"
+ManifestJsonControlPanelView.label = u"Manifest.json settings"
 
 
 def get_manifest_json_settings():

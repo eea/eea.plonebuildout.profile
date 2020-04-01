@@ -17,12 +17,16 @@ class ManifestJsonView(BrowserView):
             return None
 
     def haveValidManifest(self):
+        """ check for the manifest
+        """
         settings = self.get_manifest_json_settings()
         if len(settings.start_url)>0:
             return 1
         return 0
 
     def json(self):
+        """ JSON dump
+        """
         settings = self.get_manifest_json_settings()
         response = {}
         response['short_name'] = settings.short_name
@@ -38,12 +42,9 @@ class ManifestJsonView(BrowserView):
         icon['type'] = 'image/png'
         icon['sizes'] = '512x512'
         response['icons'].append(icon)
-
         response['start_url'] = settings.start_url
         response['background_color'] = settings.background_color
         response['display'] = settings.display
-
-
         return json.dumps(response)
 
     def get_manifest_json_settings(self):

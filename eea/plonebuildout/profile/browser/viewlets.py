@@ -24,7 +24,7 @@ CONNECT_TIMEOUT = 3.0
 
 
 class NewReleaseViewlet(ViewletBase):
-    """A viewlet which informs managers of new EEA KGS releases
+    """ A viewlet which informs managers of new EEA KGS releases
     """
 
     def current_kgs_version(self):
@@ -35,7 +35,7 @@ class NewReleaseViewlet(ViewletBase):
     #we cache the result for 24 hours
     @ram.cache(lambda *args:time() // (60*60*24))
     def last_kgs_update(self):
-        """Return a version number if running old KGS version, otherwise None
+        """ Return a version number if running old KGS version, otherwise None
         """
 
         kgsver = self.current_kgs_version()
@@ -106,7 +106,7 @@ class ManifestJsonViewlet(ViewletBase):
         registry = getUtility(IRegistry, context=api.portal.get())
         try:
             s = registry.forInterface(IManifestJsonSettings)
-        except:
+        except KeyError:
             s = object()
         return s
 
