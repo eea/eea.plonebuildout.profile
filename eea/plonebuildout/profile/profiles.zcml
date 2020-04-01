@@ -26,4 +26,11 @@
     description="Setup EEA Plone buildout profile"
     handler="eea.plonebuildout.profile.setuphandlers.setupVarious" />
 
+  <genericsetup:registerProfile
+    name="upgrade.4.3"
+    title="Upgrade profile for EEAPlonebuildoutProfile 4.3"
+    description="This profile contains configuration changes from 4.2 to 4.3"
+    directory="profiles/upgrade/to_43"
+    provides="Products.GenericSetup.interfaces.EXTENSION" />
+
 </configure>

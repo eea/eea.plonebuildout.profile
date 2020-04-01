@@ -12,6 +12,11 @@ from eea.plonebuildout.profile.browser.utils import REQUIRED_PKGS
 from plone.app.layout.viewlets.common import ViewletBase
 from plone.memoize import ram
 
+from zope.component import getUtility
+from eea.plonebuildout.profile.controlpanel.manifest_json import IManifestJsonSettings
+from plone import api
+from plone.registry.interfaces import IRegistry
+
 logger = logging.getLogger('eea.plonebuildout.profile')
 EEA_KGS_URL = "https://api.github.com/repos/eea/eea.docker.kgs/tags"
 READ_TIMEOUT = 3.0
@@ -19,7 +24,7 @@ CONNECT_TIMEOUT = 3.0
 
 
 class NewReleaseViewlet(ViewletBase):
-    """A viewlet which informs managers of new EEA KGS releases
+    """ A viewlet which informs managers of new EEA KGS releases
     """
 
     def current_kgs_version(self):
@@ -30,7 +35,7 @@ class NewReleaseViewlet(ViewletBase):
     #we cache the result for 24 hours
     @ram.cache(lambda *args:time() // (60*60*24))
     def last_kgs_update(self):
-        """Return a version number if running old KGS version, otherwise None
+        """ Return a version number if running old KGS version, otherwise None
         """
 
         kgsver = self.current_kgs_version()
@@ -91,3 +96,23 @@ class RequiredPkgsViewlet(ViewletBase):
                         missing[pkg_id] = missing_pkg
 
         return missing
+
+class ManifestJsonViewlet(ViewletBase):
+    def get_manifest_json_settings(self):
+        """ Return the settings as set in site/@@pwa-controlpanel
+
+            Usage: s.name
+        """
+        registry = getUtility(IRegistry, context=api.portal.get())
+        try:
+            s = registry.forInterface(IManifestJsonSettings)
+        except KeyError:
+            s = object()
+        return s
+
+    def get_theme_color(self):
+        settings = self.get_manifest_json_settings()
+        if hasattr(settings, 'theme_color'):
+            return settings.theme_color
+
+        return ''
