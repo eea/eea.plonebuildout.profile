@@ -2,27 +2,27 @@ Changelog
 =========
 
 4.6-dev0 - (unreleased)
----------------------
+--------------------------
 * Feature: implemented Manifest.json renderer and editing tools.
   [iugin refs #115143]
 
 4.5 - (2019-05-16)
----------------------
+--------------------------
 * Change: Moved raven processor to Sentry dedicated package eea.sentry
   [avoinea refs #104872]
 
 4.4 - (2019-01-28)
----------------------
+--------------------------
 * Jenkins: Add sonarqube step
   [avoinea refs #101552]
 
 4.3 - (2018-09-25)
----------------------
+--------------------------
 * Cleanup: Remove eea.controlpanel dependency
   [avoinea refs #95687]
 
 4.2 - (2018-09-12)
----------------------
+--------------------------
 * Upgrade step: Within "Plone > Site setup > Add-ons" click on
   upgrade button available for EEA Plone buildout profile.
   [avoinea refs #95172]
@@ -30,22 +30,22 @@ Changelog
   [avoinea refs #95172]
 
 4.1 - (2018-09-10)
----------------------
+--------------------------
 * Cleanup: Remove eea.socialmedia dependency
   [avoinea refs #95341]
 
 4.0 - (2018-07-30)
----------------------
+--------------------------
 * Feature: added 'cssselect' as dependency, required by lxml version 3.x
   [alecghica refs #96974]
 
 3.9 - (2018-06-20)
----------------------
+--------------------------
 * Change: updated URLs pointing to eea.europa.eu with https://
   [alecghica refs #95849]
 
 3.8 - (2018-06-12)
----------------------
+--------------------------
 * Feature: Add custom raven processors to cleanup Zope REQUEST
   [avoinea refs #95646]
 
