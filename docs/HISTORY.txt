@@ -1,6 +1,9 @@
 Changelog
 =========
 
+4.8-dev0 - (unreleased)
+---------------------------
+
 4.7 - (2021-03-29)
 ---------------------------
 * Change: Add dependency to eea.geolocation
