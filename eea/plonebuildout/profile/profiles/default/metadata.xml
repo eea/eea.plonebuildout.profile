@@ -4,9 +4,11 @@
  <version>4.3</version>
 
  <dependencies>
+  <dependency>profile-collective.taxonomy:default</dependency>
   <dependency>profile-eea.depiction:default</dependency>
   <dependency>profile-eea.facetednavigation:default</dependency>
   <dependency>profile-eea.faceted.inheritance:default</dependency>
+  <dependency>profile-eea.geolocation:default</dependency>
   <dependency>profile-eea.geotags:default</dependency>
   <dependency>profile-eea.rdfmarshaller:default</dependency>
   <dependency>profile-eea.relations:default</dependency>

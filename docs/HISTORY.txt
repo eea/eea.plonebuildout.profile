@@ -1,6 +1,11 @@
 Changelog
 =========
 
+4.7 - (2021-03-29)
+---------------------------
+* Change: Add dependency to eea.geolocation
+  [avoinea]
+
 4.6 - (2020-04-01)
 --------------------------
 * Feature: implemented Manifest.json renderer and editing tools.
